@@ -1,5 +1,6 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import Script from "next/script";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -23,7 +24,7 @@ export default function RootLayout({ children }) {
       <head>
         {/* Link to the manifest file */}
         <link rel="manifest" href="/manifest.json" />
-        <script src="https://kulroakonsu.net/88/tag.min.js" data-zone="140092" async data-cfasync="false"></script>
+        <Script src="https://kulroakonsu.net/88/tag.min.js" data-zone="140092" async data-cfasync="false"></Script>
         {/* Other meta tags can go here */}
       </head>
       <body
