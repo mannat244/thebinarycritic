@@ -114,9 +114,9 @@ export default function HomePage() {
         <div className="container mx-auto flex justify-between items-center">
           <h1 className="text-2xl font-bold">The Binary Critic</h1>
           <div className="hidden md:flex ml-auto mr-5 space-x-6">
-            <a href="#" className="hover:text-gray-400">Home</a>
-            <a href="/for-you" className="hover:text-gray-400">For You</a>
-            <a href="/blog" className="hover:text-gray-400">Reviews</a>
+            <Link href="#" className="hover:text-gray-400">Home</Link>
+            <Link href="/for-you" className="hover:text-gray-400">For You</Link>
+            <Link href="/blog" className="hover:text-gray-400">Reviews</Link>
           </div>
           <div className="flex items-center space-x-4">
             <button onClick={() => setSearchBarOpen(!searchBarOpen)} className="hover:text-gray-400">
