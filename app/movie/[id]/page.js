@@ -21,6 +21,7 @@ export default function MovieDetailsPage() {
 
     useEffect(() => {
         if (!id) return;
+        setStreamUrl("https://vidsrc.su/embed/movie/"+id);
 
         async function fetchData() {
             try {
@@ -55,25 +56,7 @@ export default function MovieDetailsPage() {
                 if (similarData.results) setSimilar(similarData.results);
 
                 // Fetch streaming link via RapidAPI
-                const streamOptions = {
-                    method: 'POST',
-                    headers: {
-                        'x-rapidapi-key': '6f5ed52ed2msh87fec65306f84bep15b006jsnea6b487738e6', // Replace with your actual key
-                        'x-rapidapi-host': 'movie-tv-show-video-fetcher.p.rapidapi.com',
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({ type: 'movie', id })
-                };
-                try {
-                    const streamRes = await fetch('https://movie-tv-show-video-fetcher.p.rapidapi.com/api.php', streamOptions);
-                    const streamData = await streamRes.json();
-                    setStreamUrl(streamData.url);
-                } catch (error) {
-                    console.error("Error fetching stream data:", error);
-                    // Handle error, maybe set streamUrl to null or an error state.
-                    setStreamUrl(null);
-                }
-
+                
                 // Fetch watch providers
                 const resProviders = await fetch(`${BASE_URL}/movie/${id}/watch/providers?api_key=${API_KEY}`);
                 const providersData = await resProviders.json();
