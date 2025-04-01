@@ -182,17 +182,30 @@ export default function HomePage() {
         </CustomCarousel>
       </div>
 
-          <Script type="text/javascript">
-	atOptions = {
-		'key' : 'cca9aa9707e412f73890a398c7acbab0',
-		'format' : 'iframe',
-		'height' : 90,
-		'width' : 728,
-		'params' : {}
-	};
-</Script>
-<Script type="text/javascript" src="//www.highperformanceformat.com/cca9aa9707e412f73890a398c7acbab0/invoke.js">
-          </Script>
+      <Script
+        id="ad-script"
+        strategy="afterInteractive"
+        dangerouslySetInnerHTML={{
+          __html: `
+            var atOptions = {
+              key: "cca9aa9707e412f73890a398c7acbab0",
+              format: "iframe",
+              height: 90,
+              width: 728,
+              params: {}
+            };
+          `,
+        }}
+      />
+
+      {/* Second script (external) */}
+      <Script
+        src="//www.highperformanceformat.com/cca9aa9707e412f73890a398c7acbab0/invoke.js"
+        strategy="afterInteractive"
+      />
+
+
+
       {/* Movie Categories */}
       {[
         ["Popular Movies", popularMovies],
