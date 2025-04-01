@@ -27,7 +27,9 @@ export default function VideoPage() {
               The Binary Critic (thebinarycritic.vercel.app) does not promote piracy or encourage any form of copyright infringement. We are a review and recommendation platform that provides information about movies and shows.
             </p>
             <p className="text-sm text-gray-300">
-              We do not host or store any video content on our servers. Our website uses an external API provided by vidsrc.su to fetch streaming links. We are not responsible for the content provided by this service.
+              We do not host or store any video content on our servers. Our website uses an external API provided by <span className='font-bold cursor-pointer'onClick={()=>{
+                window.open('https://vidsrc.su/', '_blank')
+              }}  >vidsrc.su </span>to fetch streaming links. We are not responsible for the content provided by this service.
             </p>
             <p className="text-sm text-gray-300">
               If you believe any video violates copyright or should be removed, please contact admin@vidsrc.su directly. We have no control over the content hosted by external providers.
