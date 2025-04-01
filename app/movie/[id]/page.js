@@ -21,7 +21,7 @@ export default function MovieDetailsPage() {
 
     useEffect(() => {
         if (!id) return;
-        setStreamUrl("https://vidsrc.su/embed/movie/"+id);
+        setStreamUrl("/video/"+id);
 
         async function fetchData() {
             try {
@@ -147,19 +147,29 @@ export default function MovieDetailsPage() {
                             <span><strong>Language:</strong> {movie.original_language.toUpperCase()}</span>
                             <span><strong>Rating:</strong> {movie.vote_average} / 10</span>
                         </div>
+                        <button
+  onClick={() => window.open(streamUrl, '_blank')}
+  className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-full shadow-lg transition hover:cursor-pointer duration-300 ease-in-out flex items-center gap-2"
+>
+  <svg className="w-6 h-6 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M8 5v14l11-7z" />
+  </svg>
+  Play Movie
+</button>
+
                         {/* Watch Providers Section */}
                         {watchProviders && watchProviders.length > 0 && (
-                            <div className="mt-4">
+                            <div className="mt-6">
                                 <h3 className="text-lg font-semibold mb-2">Available On:</h3>
                                 <div className="flex flex-wrap items-center gap-4">
                                     {watchProviders.map((provider,index) => (
-                                      <div key={index}>
+                                      <div  className="flex items-center" key={index}>
                                             <Image
                                                 src={`${IMAGE_BASE_URL}${provider.logo_path}`}
                                                 alt={provider.provider_name}
                                                 width={40}
                                                 height={40}
-                                                className="rounded-lg"
+                                                className="mx-1 mr-2 rounded-lg"
                                             />
                                             <span>{provider.provider_name}</span>
                                         </div>
@@ -168,7 +178,8 @@ export default function MovieDetailsPage() {
                                 <p className="text-xs text-gray-400 mt-1">Streaming info provided by JustWatch</p>
                             </div>
                         )}
-                    </div>
+                       
+                    </div> 
                 </div>
             </div>
 
@@ -255,8 +266,7 @@ export default function MovieDetailsPage() {
             <footer className="bg-gray-900 py-4">
                
                 <div className="container mx-auto text-center text-sm text-gray-400">
-                    <Link href={streamUrl ? streamUrl : ""}>
-                © {new Date().getFullYear()} The Binary Critic. All Rights Reserved. </Link>
+                © {new Date().getFullYear()} The Binary Critic. All Rights Reserved.
                 </div>
             </footer>
 
