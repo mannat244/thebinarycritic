@@ -49,8 +49,8 @@ export default function Navbar() {
           <Link href="/for-you" className="block py-2 hover:text-gray-400">
             For You
           </Link>
-          <Link href="/account" className="block py-2 hover:text-gray-400">
-            Account
+          <Link href="/blog" className="block py-2 hover:text-gray-400">
+            Reviews
           </Link>
         </div>
       )}
