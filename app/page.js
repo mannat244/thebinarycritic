@@ -4,7 +4,7 @@ import { useEffect, useState, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Menu, X, Search } from "lucide-react";
-import Script from "next/script";
+
 
 const API_KEY = "6ed6405b3ed2d0d1c0cc584ef27b7a9e";
 const BASE_URL = "https://api.themoviedb.org/3";
@@ -181,30 +181,6 @@ export default function HomePage() {
           ))}
         </CustomCarousel>
       </div>
-
-      <Script
-        id="ad-script"
-        strategy="afterInteractive"
-        dangerouslySetInnerHTML={{
-          __html: `
-            var atOptions = {
-              key: "cca9aa9707e412f73890a398c7acbab0",
-              format: "iframe",
-              height: 90,
-              width: 728,
-              params: {}
-            };
-          `,
-        }}
-      />
-
-      {/* Second script (external) */}
-      <Script
-        src="//www.highperformanceformat.com/cca9aa9707e412f73890a398c7acbab0/invoke.js"
-        strategy="afterInteractive"
-      />
-
-
 
       {/* Movie Categories */}
       {[

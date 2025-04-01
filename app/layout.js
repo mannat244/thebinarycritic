@@ -22,9 +22,9 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <head>
-        {/* Link to the manifest file */}
+
         <link rel="manifest" href="/manifest.json" />
-        {/* Other meta tags can go here */}
+    
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
