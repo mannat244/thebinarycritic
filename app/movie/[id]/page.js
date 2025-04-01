@@ -169,8 +169,8 @@ export default function MovieDetailsPage() {
                             <div className="mt-4">
                                 <h3 className="text-lg font-semibold mb-2">Available On:</h3>
                                 <div className="flex flex-wrap items-center gap-4">
-                                    {watchProviders.map((provider) => (
-                                      <div>
+                                    {watchProviders.map((provider,index) => (
+                                      <div key={index}>
                                             <Image
                                                 src={`${IMAGE_BASE_URL}${provider.logo_path}`}
                                                 alt={provider.provider_name}
@@ -194,8 +194,8 @@ export default function MovieDetailsPage() {
                 <div className="my-8 mx-2">
                     <h2 className="text-2xl font-semibold mb-4">Cast</h2>
                     <div className="flex space-x-4 overflow-x-auto scroll-smooth hide-scrollbar pb-4">
-                        {cast.map(member => (
-                            <div key={member.id} className="min-w-[150px] bg-gray-800 rounded-lg shadow-md cursor-pointer">
+                        {cast.map((member,index) => (
+                            <div key={index} className="min-w-[150px] bg-gray-800 rounded-lg shadow-md cursor-pointer">
                                 <div className="relative h-[225px]">
                                     {member.profile_path ? (
                                         <Image
@@ -245,8 +245,8 @@ export default function MovieDetailsPage() {
                 <div className="my-8 mx-2">
                     <h2 className="text-2xl font-semibold pb-4">Similar Movies</h2>
                     <div className="flex space-x-4 overflow-x-auto scroll-smooth hide-scrollbar pb-4">
-                        {similar.map(simMovie => (
-                            <Link key={simMovie.id} href={`/movie/${simMovie.id}`}>
+                        {similar.map((simMovie,index) => (
+                            <Link key={index} href={`/movie/${simMovie.id}`}>
                                 <div className="relative min-w-[200px] bg-gray-800 rounded-lg shadow-md group cursor-pointer">
                                     <div className="relative h-[300px]">
                                         <Image

@@ -129,9 +129,9 @@ export default function HomePage() {
         </div>
         {menuOpen && (
           <div className="md:hidden bg-gray-800 rounded-2xl px-4 py-2 m">
-            <a href="#" className="block py-2 hover:text-gray-400">Home</a>
-            <a href="/for-you" className="block py-2 hover:text-gray-400">For You</a>
-            <a href="/blog" className="block py-2 hover:text-gray-400">Reviews</a>
+            <Link href="#" className="block py-2 hover:text-gray-400">Home</Link>
+            <Link href="/for-you" className="block py-2 hover:text-gray-400">For You</Link>
+            <Link href="/blog" className="block py-2 hover:text-gray-400">Reviews</Link>
           </div>
         )}
         {/* Search Bar Overlay (opens on clicking the search icon) */}
