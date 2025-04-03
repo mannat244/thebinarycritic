@@ -176,10 +176,10 @@ export default function MovieDetailsPage() {
   }}
   className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-full shadow-lg transition hover:cursor-pointer duration-300 ease-in-out flex items-center gap-2"
 >
-  <svg className="w-6 h-6 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+  {/* <svg className="w-6 h-6 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
     <path d="M8 5v14l11-7z" />
-  </svg>
-  Play Movie
+  </svg> */}
+  Watch Movie
 </button>}
 
                         {/* Watch Providers Section */}
