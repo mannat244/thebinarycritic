@@ -6,7 +6,8 @@ import { useParams } from 'next/navigation';
 export default function VideoPage() {
   const { id } = useParams();
   const [disclaimerVisible, setDisclaimerVisible] = useState(true);
-  const videoUrl = `https://vidsrc.su/embed/movie/${id}`;
+  // const videoUrl = `https://vidsrc.su/embed/movie/${id}`;
+  const videoUrl = `https://vjs.zencdn.net/v/oceans.mp4`;
 
   return (
     <div className="relative w-full h-screen bg-black">

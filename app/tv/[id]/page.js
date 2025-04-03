@@ -20,6 +20,7 @@ export default function TVShowDetailsPage() {
   const [similarTV, setSimilarTV] = useState([]);
   const [watchProviders, setWatchProviders] = useState([]);
   const [selectedEpisode, setSelectedEpisode] = useState(null);
+  const [streamURL, setstreamURL] = useState(null)
 
   useEffect(() => {
     if (!id) return;
@@ -60,6 +61,26 @@ export default function TVShowDetailsPage() {
         } else {
           setWatchProviders([]);
         }
+
+
+        async function fetchStreamingLink(providerName, movieTitle) {
+            try {
+                const response = await fetch(`/api/fetchStreaming?provider=${providerName}&movie=${movieTitle}`);
+                const data = await response.json();
+        
+                if (data.organic_results && data.organic_results.length > 0) {
+                    setstreamURL(data.organic_results[0].link);
+                } else {
+                    console.warn("No streaming link found.");
+                    setstreamURL(null);
+                }
+            } catch (error) {
+                console.error("Error fetching streaming link:", error);
+            }
+        }
+        const provider = providersData?.results?.IN?.flatrate?.[0]?.provider_name || "Unknown Provider";
+        fetchStreamingLink(provider, showData.name);
+
       } catch (error) {
         console.error("Error fetching TV show data:", error);
       }
@@ -70,7 +91,7 @@ export default function TVShowDetailsPage() {
 
   const handlePlayEpisode = () => {
     if (!selectedEpisode) return;
-    const url = `/series/${id}/${selectedSeason}/${selectedEpisode}`;
+    const url = streamURL;
     window.open(url, '_blank');
   };
 
@@ -128,45 +149,14 @@ export default function TVShowDetailsPage() {
               <span><strong>First Air Date:</strong> {show.first_air_date}</span>
               <span><strong>Rating:</strong> {show.vote_average} / 10</span>
             </div>
-            {seasonDetails && seasonDetails.episodes && (
-          <div className="mt-8">
-            <h2 className="text-3xl font-bold mb-4">Episodes</h2>
-            <div className="flex flex-col space-y-4">
-              <div>
-                <label htmlFor="seasonSelect" className="mr-2 font-bold">Select Season:</label>
-                <select
-                  id="seasonSelect"
-                  value={selectedSeason}
-                  onChange={(e) => setSelectedSeason(Number(e.target.value))}
-                  className="bg-gray-700 p-2 rounded"
-                >
-                  {seasons.map((s) => (
-                    <option key={s.id} value={s.season_number}>
-                      {s.name || `Season ${s.season_number}`}
-                    </option>
-                  ))}
-                </select>
-              </div>
-              <div>
-                <label htmlFor="episodeSelect" className="mr-2 font-bold">Select Episode:</label>
-                <select
-                  id="episodeSelect"
-                  value={selectedEpisode}
-                  onChange={(e) => setSelectedEpisode(Number(e.target.value))}
-                  className="bg-gray-700 p-2 w-fit rounded"
-                >
-                  {seasonDetails.episodes.map((episode) => (
-                    <option key={episode.id} value={episode.episode_number}>
-                      Episode {episode.episode_number}: {episode.name}
-                    </option>
-                  ))}
-                </select>
-              </div>
-              <div className='flex-row md:flex items-center h-fit w-fit'><button
+            {seasonDetails && (watchProviders.length>0 || streamURL) && seasonDetails.episodes && (
+          <div className="">
+            <div className="flex flex-col ">
+              <div className='flex-col md:flex items-center h-fit w-fit'><button
                 onClick={handlePlayEpisode}
-                className="mt-4 bg-blue-600 h-10 mr-5 py flex items-center hover:bg-blue-700 text-white font-bold py-3 px-3 w-fit rounded-full shadow-lg transition duration-300"
+                className="mt-4 bg-blue-600 h-10  ml-1 cursor-pointer mr-auto py flex items-center hover:bg-blue-700 text-white font-bold py-3 px-3 w-fit rounded-full shadow-lg transition duration-300"
               >
-                Play Episode
+                Watch Now
               </button>
               {watchProviders.length > 0 && (
               <div className="mt-6 ml-3">

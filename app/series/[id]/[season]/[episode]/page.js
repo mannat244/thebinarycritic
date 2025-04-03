@@ -9,7 +9,8 @@ export default function VideoPage() {
   const [disclaimerVisible, setDisclaimerVisible] = useState(true);
   
   // Construct the embed URL for TV series
-  const videoUrl = `https://vidsrc.su/embed/tv/${id}/${season}/${episode}`;
+//   const videoUrl = `https://vidsrc.su/embed/tv/${id}/${season}/${episode}`;
+  const videoUrl = `https://vjs.zencdn.net/v/oceans.mp4`;
 
   return (
     <div className="relative w-full h-screen bg-black">

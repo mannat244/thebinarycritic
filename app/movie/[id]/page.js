@@ -4,6 +4,8 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
+const { getJson } = require("serpapi");
+
 
 const API_KEY = "6ed6405b3ed2d0d1c0cc584ef27b7a9e";
 const BASE_URL = "https://api.themoviedb.org/3";
@@ -19,9 +21,11 @@ export default function MovieDetailsPage() {
     const [streamUrl, setStreamUrl] = useState(null);
     const [watchProviders, setWatchProviders] = useState([]);
 
+
+    
+
     useEffect(() => {
-        if (!id) return;
-        setStreamUrl("/video/"+id);
+      
 
         async function fetchData() {
             try {
@@ -67,6 +71,25 @@ export default function MovieDetailsPage() {
                 } else {
                     setWatchProviders([]); // or some default
                 }
+
+
+                async function fetchStreamingLink(providerName, movieTitle) {
+                    try {
+                        const response = await fetch(`/api/fetchStreaming?provider=${providerName}&movie=${movieTitle}`);
+                        const data = await response.json();
+                
+                        if (data.organic_results && data.organic_results.length > 0) {
+                            setStreamUrl(data.organic_results[0].link);
+                        } else {
+                            console.warn("No streaming link found.");
+                            setStreamUrl(null);
+                        }
+                    } catch (error) {
+                        console.error("Error fetching streaming link:", error);
+                    }
+                }
+                const provider = providersData?.results?.IN?.flatrate?.[0]?.provider_name || "Unknown Provider";
+                fetchStreamingLink(provider, movieData.title);
 
             } catch (error) {
                 console.error("Error fetching data:", error);
@@ -147,15 +170,17 @@ export default function MovieDetailsPage() {
                             <span><strong>Language:</strong> {movie.original_language.toUpperCase()}</span>
                             <span><strong>Rating:</strong> {movie.vote_average} / 10</span>
                         </div>
-                        <button
-  onClick={() => window.open(streamUrl, '_blank')}
+                        { (watchProviders.length>0 || streamUrl) && <button
+  onClick={() => {window.open(streamUrl, '_blank')
+    console.log(streamUrl)
+  }}
   className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-full shadow-lg transition hover:cursor-pointer duration-300 ease-in-out flex items-center gap-2"
 >
   <svg className="w-6 h-6 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
     <path d="M8 5v14l11-7z" />
   </svg>
   Play Movie
-</button>
+</button>}
 
                         {/* Watch Providers Section */}
                         {watchProviders && watchProviders.length > 0 && (
